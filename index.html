@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exit Simulator</title>
+    <meta name="description" content="Інтерактивний симулятор рішення PE-фонду: вихід із трьох компаній за 24 місяці, $15m капіталу, Монте-Карло ризиків. Case Challenge 3.0." />
+    <meta name="theme-color" content="#0E1525" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Exit Simulator — рішення PE-фонду" />
+    <meta property="og:description" content="Фокус на Security Hardware: $10m / $3m / $0 / $2m резерву. Перевірте самі «а що, якщо…»." />
+    <meta property="og:image" content="__SITE_URL__/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Тема до першого рендеру, щоб не блимало
+      try {
+        var t = localStorage.getItem('theme')
+        var dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+        if (dark) document.documentElement.classList.add('dark')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+.env
+# секрети (токен бота) — не комітити
+env.
+.env.*
+
+node_modules
+dist
+dist-ssr
+*.local
+*.log
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
