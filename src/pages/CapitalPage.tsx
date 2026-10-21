@@ -28,6 +28,7 @@ export default function CapitalPage() {
   const best = useMemo(() => optimizeAllocation(state.a, state.ev), [state.a, state.ev])
   const gap = (best.r.total - team.total) / best.r.total
   const isTeam = KEYS.every((k) => x[k] === TEAM_ALLOCATION[k])
+  const isBest = KEYS.every((k) => x[k] === best.x[k])
 
   const setAlloc = (k: keyof Allocation, v: number) => {
     const next = clampAllocation({ ...x, [k]: v }, k)
@@ -80,8 +81,14 @@ export default function CapitalPage() {
           <Button onClick={() => apply(TEAM_ALLOCATION)} disabled={isTeam}>
             ● Рішення команди
           </Button>
-          <Button onClick={() => apply(best.x)}>Показати оптимум</Button>
+          <Button onClick={() => apply(best.x)} disabled={isBest}>
+            {isBest ? '✓ Це оптимум' : 'Показати оптимум'}
+          </Button>
         </div>
+        <p className="num mt-2 text-xs text-muted" aria-live="polite">
+          Зараз: {fmtAlloc(x)} → {money(r.total)}
+          {isBest ? ' — це і є оптимум.' : ` — на ${pct((best.r.total - r.total) / best.r.total, 1)} нижче оптимуму.`}
+        </p>
       </Card>
 
       <div className="grid gap-4 md:grid-cols-[1fr_1fr]">

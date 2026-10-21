@@ -1,0 +1,22 @@
+{
+  "name": "board-alerts-bot",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Демо Telegram-бота «Board Alerts» для Exit Simulator",
+  "scripts": {
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit",
+    "bundle": "esbuild webhook.ts --bundle --platform=node --format=esm --target=node20 --legal-comments=none --minify --banner:js=\"// Згенеровано з bot/webhook.ts (npm run bundle у bot/). Не редагувати вручну.\nimport { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\" --alias:grammy=./node_modules/grammy/out/web.mjs --outfile=../api/bot.js",
+    "webhook": "tsx set-webhook.ts"
+  },
+  "dependencies": {
+    "grammy": "^1.46.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3"
+  }
+}

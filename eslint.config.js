@@ -5,7 +5,8 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist', 'bot/node_modules'] },
+  // api/bot.js — згенерований бандл бота (bot/webhook.ts)
+  { ignores: ['dist', 'api', 'bot/node_modules', 'bot/.data'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
@@ -21,5 +22,9 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
+  },
+  {
+    files: ['bot/**/*.ts'],
+    languageOptions: { globals: globals.node },
   },
 )

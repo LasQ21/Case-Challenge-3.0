@@ -1,0 +1,366 @@
+{
+  "note": "MOCK-дані для демо. Не реальні KPI компаній. Змініть currentMonth або значення — бот надішле нові тригери підписникам.",
+  "currentMonth": 8,
+  "months": [
+    {
+      "month": 1,
+      "it": {
+        "utilization": 0.7
+      },
+      "sec": {
+        "margin": 0.2,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 0.4
+      },
+      "ecom": {
+        "moratorium": "pending"
+      }
+    },
+    {
+      "month": 2,
+      "it": {
+        "utilization": 0.7
+      },
+      "sec": {
+        "margin": 0.2,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 0.9
+      },
+      "ecom": {
+        "moratorium": "pending"
+      }
+    },
+    {
+      "month": 3,
+      "it": {
+        "utilization": 0.69
+      },
+      "sec": {
+        "margin": 0.2,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 1.5
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 4,
+      "it": {
+        "utilization": 0.68
+      },
+      "sec": {
+        "margin": 0.2,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 2.1
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 5,
+      "it": {
+        "utilization": 0.67
+      },
+      "sec": {
+        "margin": 0.199,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 2.8
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 6,
+      "it": {
+        "utilization": 0.66
+      },
+      "sec": {
+        "margin": 0.198,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 3.4
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 7,
+      "it": {
+        "utilization": 0.66
+      },
+      "sec": {
+        "margin": 0.197,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 4.0
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 8,
+      "it": {
+        "utilization": 0.65
+      },
+      "sec": {
+        "margin": 0.196,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 4.6
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 9,
+      "it": {
+        "utilization": 0.64
+      },
+      "sec": {
+        "margin": 0.195,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 5.2
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 10,
+      "it": {
+        "utilization": 0.66
+      },
+      "sec": {
+        "margin": 0.193,
+        "exportPermits": "pending",
+        "euSerialProduction": false,
+        "programSpend": 5.8
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 11,
+      "it": {
+        "utilization": 0.69
+      },
+      "sec": {
+        "margin": 0.19,
+        "exportPermits": "granted",
+        "euSerialProduction": false,
+        "programSpend": 6.4
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 12,
+      "it": {
+        "utilization": 0.71
+      },
+      "sec": {
+        "margin": 0.188,
+        "exportPermits": "granted",
+        "euSerialProduction": false,
+        "programSpend": 7.0
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 13,
+      "it": {
+        "utilization": 0.73
+      },
+      "sec": {
+        "margin": 0.186,
+        "exportPermits": "granted",
+        "euSerialProduction": false,
+        "programSpend": 7.5
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 14,
+      "it": {
+        "utilization": 0.74
+      },
+      "sec": {
+        "margin": 0.183,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 8.0
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 15,
+      "it": {
+        "utilization": 0.75
+      },
+      "sec": {
+        "margin": 0.177,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 8.5
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 16,
+      "it": {
+        "utilization": 0.76
+      },
+      "sec": {
+        "margin": 0.175,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 9.0
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 17,
+      "it": {
+        "utilization": 0.77
+      },
+      "sec": {
+        "margin": 0.182,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 9.4
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 18,
+      "it": {
+        "utilization": 0.77
+      },
+      "sec": {
+        "margin": 0.186,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 9.8
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 19,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.19,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 10.2
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 20,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.192,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 10.6
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 21,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.194,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 10.9
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 22,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.195,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 11.2
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 23,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.196,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 11.4
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    },
+    {
+      "month": 24,
+      "it": {
+        "utilization": 0.78
+      },
+      "sec": {
+        "margin": 0.197,
+        "exportPermits": "granted",
+        "euSerialProduction": true,
+        "programSpend": 11.6
+      },
+      "ecom": {
+        "moratorium": "granted"
+      }
+    }
+  ]
+}

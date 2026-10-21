@@ -12,3 +12,6 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# дані бота (chat id підписників)
+bot/.data
