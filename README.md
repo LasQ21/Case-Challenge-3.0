@@ -40,5 +40,5 @@ npm run build      # статичний сайт у dist/
 - **Vercel:** імпортувати репозиторій, фреймворк Vite, build `npm run build`, output `dist`.
 - **GitHub Pages:** `npm run build` і опублікувати `dist/`.
 
-Після деплою задайте `SITE_URL=https://<ваш-домен>` у змінних середовища збірки, щоб `og:image`
-був абсолютним (месенджери не підтягують відносні адреси). Картинка лежить у `public/og.png`, джерело — `scripts/og.svg`.
+На Vercel `og:image` автоматично отримує абсолютну адресу production-домену (`VERCEL_PROJECT_PRODUCTION_URL`).
+Для іншого хостингу або власного домену задайте `SITE_URL=https://<домен>` у змінних середовища збірки. Картинка лежить у `public/og.png`, джерело — `scripts/og.svg`.
