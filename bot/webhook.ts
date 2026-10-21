@@ -1,14 +1,15 @@
 // Board Alerts на Vercel: Telegram надсилає оновлення на /api/bot (вебхук).
 // Збирається в один файл api/bot.js командою `npm run bundle` (у папці bot/).
 // Змінні середовища проєкту на Vercel:
-//   TELEGRAM_BOT_TOKEN       — токен бота
+//   TELEGRAM_BOT_TOKEN або API_TELEGRAM — токен бота
 //   TELEGRAM_WEBHOOK_SECRET  — секрет, яким Telegram підписує запити (той самий, що в setWebhook)
 //   KPI_MONTH (необов'язково) — поточний місяць замість currentMonth з kpi.mock.json
 import { Bot, webhookCallback } from 'grammy'
 import { COMMAND_LIST, registerCommands, type KpiFile } from './commands.ts'
 import kpiData from './kpi.mock.json' with { type: 'json' }
 
-const token = process.env.TELEGRAM_BOT_TOKEN ?? ''
+// API_TELEGRAM — та сама назва, що у файлі env.
+const token = process.env.TELEGRAM_BOT_TOKEN ?? process.env.API_TELEGRAM ?? ''
 const secret = process.env.TELEGRAM_WEBHOOK_SECRET
 
 const kpi = kpiData as KpiFile
@@ -32,7 +33,7 @@ function getBot(): Bot {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  if (!token) return new Response('TELEGRAM_BOT_TOKEN не задано', { status: 500 })
+  if (!token) return new Response('TELEGRAM_BOT_TOKEN / API_TELEGRAM не задано', { status: 500 })
   if (!secret) return new Response('TELEGRAM_WEBHOOK_SECRET не задано', { status: 500 })
   getBot()
   try {

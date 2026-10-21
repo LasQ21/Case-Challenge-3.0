@@ -70,7 +70,7 @@ npm start
 Підписки й розсилки за зміною файлу KPI є лише в локальному режимі (serverless не зберігає стан);
 поточний місяць на Vercel можна змінити змінною `KPI_MONTH`.
 
-1. У Vercel → Project Settings → Environment Variables (Production) додайте `TELEGRAM_BOT_TOKEN`
+1. У Vercel → Project Settings → Environment Variables (Production) додайте `TELEGRAM_BOT_TOKEN` (або `API_TELEGRAM`)
    і `TELEGRAM_WEBHOOK_SECRET` (секрет генерує `npm run webhook` у файл `env.`).
 2. Після зміни `bot/*.ts` перезберіть функцію: `cd bot && npm run bundle` і закомітьте `api/bot.js`.
 3. Після деплою: `cd bot && npm run webhook` — реєструє вебхук `https://case-challenge-3-0.vercel.app/api/bot`.
