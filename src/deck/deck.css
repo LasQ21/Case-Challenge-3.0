@@ -1,5 +1,5 @@
 /* Дек: фіксована сцена 1920×1080, рівномірно масштабована. Елементи слайда позиціоновані
-   в пікселях сцени — ті самі координати, що й у Moda-версії деку. */
+   в дюймах слайда PPTX (1 in = 144 px), тож сайт і Exit-Simulator-deck.pptx збігаються. */
 
 .deck-viewport {
   position: fixed;
@@ -15,8 +15,8 @@
   width: 1920px;
   height: 1080px;
   transform-origin: center;
-  background: #f3f3ef;
-  color: #15171c;
+  background: #f5f6fa;
+  color: #10111c;
   box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
   overflow: hidden;
   font-family: var(--font-sans);
@@ -112,9 +112,9 @@
   align-items: center;
   gap: 4px;
   padding: 4px;
-  border: 1px solid rgb(243 243 239 / 0.2);
-  background: rgb(21 23 28 / 0.8);
-  color: #f3f3ef;
+  border: 1px solid rgb(245 246 250 / 0.2);
+  background: rgb(16 17 28 / 0.8);
+  color: #f5f6fa;
   font: 400 13px/1 var(--font-mono);
   opacity: 0.35;
   transition: opacity 200ms;
@@ -156,7 +156,7 @@
 @media print {
   html,
   body {
-    background: #f3f3ef;
+    background: #f5f6fa;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }

@@ -149,7 +149,7 @@ function Shell() {
             <a href="./deck.html" className={btnClass('solid')}>
               Презентація ↗
             </a>
-            <a href="./deck.pdf" download="Фокус фонду — Security Hardware.pdf" className={btnClass()}>
+            <a href="./deck.pdf" download="CC-146 — Exit Simulator.pdf" className={btnClass()}>
               PDF
             </a>
             <Button onClick={() => setSharing(true)}>Поділитися · QR</Button>
