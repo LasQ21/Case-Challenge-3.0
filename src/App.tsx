@@ -1,4 +1,5 @@
 import { lazy, Suspense, useLayoutEffect, useRef, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { DISCLAIMER } from './model/config'
 import { portfolio } from './model/valuation'
 import { money } from './lib/format'
@@ -197,6 +198,7 @@ export default function App() {
   return (
     <AppStateProvider>
       <Shell />
+      <Analytics />
     </AppStateProvider>
   )
 }
