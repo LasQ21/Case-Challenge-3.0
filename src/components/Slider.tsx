@@ -21,7 +21,7 @@ export function Slider({ label, value, min, max, step, format, base, benchmark, 
           {label}
         </label>
         <span className="num text-sm font-semibold text-ink">
-          {formatBy(format, value)}
+          <span key={value} className="tick">{formatBy(format, value)}</span>
           {changed && (
             <span className="ml-1.5 text-xs font-normal text-muted">база {formatBy(format, base!)}</span>
           )}
@@ -35,6 +35,7 @@ export function Slider({ label, value, min, max, step, format, base, benchmark, 
           max={max}
           step={step}
           value={value}
+          style={{ ['--fill' as string]: pos(value) }}
           aria-valuetext={formatBy(format, value)}
           onChange={(e) => onChange(snap(Number(e.target.value), step))}
         />

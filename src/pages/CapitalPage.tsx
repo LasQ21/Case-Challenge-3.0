@@ -48,7 +48,7 @@ export default function CapitalPage() {
 
   const reserve = reserveOf(x)
   const shares = [
-    { k: 'Security', v: x.sec, cls: 'bg-accent' },
+    { k: 'Security', v: x.sec, cls: 'bar-fill' },
     { k: 'E-com', v: x.ecom, cls: 'bg-ink' },
     { k: 'IT', v: x.it, cls: 'bg-sq' },
     { k: 'Резерв', v: reserve, cls: 'bg-surface-2' },
@@ -61,9 +61,9 @@ export default function CapitalPage() {
         очікуваних грошей — і наскільки рішення команди близьке до найкращого.
       </PageIntro>
 
-      <Card className="border-accent/40">
-        <p className="text-xs uppercase tracking-wide text-muted">Висновок</p>
-        <p className="mt-1 font-serif text-2xl font-semibold text-ink sm:text-3xl">
+      <Card className="sheet">
+        <p className="text-sm font-semibold text-muted">Висновок</p>
+        <p className="mt-1 font-display text-2xl font-semibold text-ink sm:text-3xl">
           {gap <= 1e-9 ? (
             <>Рішення команди збігається з оптимумом перебору</>
           ) : (

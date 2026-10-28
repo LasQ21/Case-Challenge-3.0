@@ -52,7 +52,7 @@ export default function RisksPage() {
                 const v = Math.trunc(Number(e.target.value))
                 if (Number.isFinite(v)) set('mc.seed', v)
               }}
-              className="num h-9 w-24 rounded-lg border border-line bg-bg px-2 text-sm text-ink"
+              className="num h-9 w-24 rounded-xl border border-line bg-surface-2 px-3 text-sm text-ink"
             />
           </div>
         </div>
@@ -211,12 +211,12 @@ function Results({ result }: { result: McResult }) {
                   −1σ: {num1(t.low, { plus: true })} · +1σ: {num1(t.high, { plus: true })}
                 </span>
               </div>
-              <div className="relative mt-1 h-3 rounded bg-surface-2" aria-hidden>
+              <div className="relative mt-1 h-3 rounded-full bg-surface-2" aria-hidden>
                 <div className="absolute inset-y-0 left-1/2 w-px bg-ink/40" />
                 {[t.low, t.high].map((v, k) => (
                   <div
                     key={k}
-                    className={`absolute inset-y-0 rounded ${v >= 0 ? 'bg-accent' : 'bg-sq'}`}
+                    className={`absolute inset-y-0 rounded-full ${v >= 0 ? 'bar-fill' : 'bg-sq'}`}
                     style={{
                       left: v >= 0 ? '50%' : `${50 - (Math.abs(v) / maxSwing) * 50}%`,
                       width: `${(Math.abs(v) / maxSwing) * 50}%`,

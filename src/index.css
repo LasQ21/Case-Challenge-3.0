@@ -2,34 +2,76 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Кольори деку. Сенс ніколи не передається лише кольором — поруч завжди є підпис. */
+/* Палітра «рідке скло»: напівпрозорі поверхні над живою авророю.
+   Фіолетово-синій — план і створення вартості, холодний сірий — без дій,
+   сигнальний помаранчевий — лише точки рішень. Сенс ніколи не передається лише кольором. */
 :root {
-  --bg: #f5f3ee;
-  --surface: #ffffff;
-  --surface-2: #ece9e1;
-  --ink: #0e1525;
-  --muted: #5b6372;
-  --line: rgb(14 21 37 / 0.12);
-  --accent: #e04a35;
-  --accent-ink: #c2371f;
-  --accent-soft: rgb(224 74 53 / 0.12);
-  --navy: #0e1525;
-  --sq: #8a919e;
+  --bg: #eceef8;
+  --surface: rgb(255 255 255 / 0.55);
+  --surface-2: rgb(30 32 80 / 0.07);
+  --ink: #10111c;
+  --muted: #565a75;
+  --line: rgb(16 17 28 / 0.1);
+  --accent: #5b47ff;
+  --accent-ink: #4632f0;
+  --accent-soft: rgb(91 71 255 / 0.12);
+  --navy: #10111c;
+  --sq: #9496ad;
+  --signal: #ff5b1f;
+  --signal-ink: #c2410c;
+
+  /* скло */
+  --glass-tint: rgb(255 255 255 / 0.42);
+  --glass-tint-2: rgb(255 255 255 / 0.18);
+  --glass-rim: rgb(255 255 255 / 0.9);
+  --glass-rim-2: rgb(255 255 255 / 0.15);
+  --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 20px 50px -20px rgb(40 30 120 / 0.25),
+    0 2px 8px -2px rgb(40 30 120 / 0.08);
+  --spot: rgb(255 255 255 / 0.55);
+
+  /* аврора */
+  --a1: #8f7bff;
+  --a2: #4fd8ff;
+  --a3: #ff8fd8;
+  --a4: #ffb36b;
+  --aurora-opacity: 0.8;
+  --grad-2: #0b84c6;
+  --grad-3: #c026d3;
+  --grid: rgb(16 17 28 / 0.05);
   color-scheme: light;
 }
 
 .dark {
-  --bg: #0e1525;
-  --surface: #172036;
-  --surface-2: #1f2a44;
-  --ink: #f5f3ee;
-  --muted: #a7aebb;
-  --line: rgb(245 243 238 / 0.14);
-  --accent: #e04a35;
-  --accent-ink: #ff8a73;
-  --accent-soft: rgb(224 74 53 / 0.2);
-  --navy: #f5f3ee;
-  --sq: #7d8699;
+  --bg: #05050b;
+  --surface: rgb(255 255 255 / 0.05);
+  --surface-2: rgb(255 255 255 / 0.08);
+  --ink: #f3f3fb;
+  --muted: #a2a3be;
+  --line: rgb(255 255 255 / 0.1);
+  --accent: #8b7bff;
+  --accent-ink: #b9afff;
+  --accent-soft: rgb(139 123 255 / 0.18);
+  --navy: #d6d1ff;
+  --sq: #7e809c;
+  --signal: #ff7a45;
+  --signal-ink: #ff9a6b;
+
+  --glass-tint: rgb(255 255 255 / 0.07);
+  --glass-tint-2: rgb(255 255 255 / 0.015);
+  --glass-rim: rgb(255 255 255 / 0.38);
+  --glass-rim-2: rgb(255 255 255 / 0.04);
+  --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.12) inset, 0 30px 60px -25px rgb(0 0 0 / 0.8),
+    0 0 0 1px rgb(255 255 255 / 0.02);
+  --spot: rgb(170 160 255 / 0.16);
+
+  --a1: #6a4dff;
+  --a2: #00b7ff;
+  --a3: #e23dd0;
+  --a4: #ff6a3d;
+  --aurora-opacity: 0.75;
+  --grad-2: var(--a2);
+  --grad-3: #ff7ae6;
+  --grid: rgb(255 255 255 / 0.035);
   color-scheme: dark;
 }
 
@@ -44,33 +86,36 @@
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-sq: var(--sq);
-  --font-serif: 'Source Serif 4', Georgia, serif;
-  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --font-display: 'Geologica', 'Onest', sans-serif;
+  --font-sans: 'Onest', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
 html {
   background: var(--bg);
+  scroll-behavior: smooth;
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* без власного фону: інакше він перекриває аврору (z-index: -1) */
 body {
   margin: 0;
-  background: var(--bg);
   min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
 }
 
 .num {
   font-variant-numeric: tabular-nums;
-}
-
-/* Повзунок у кольорах деку */
-input[type='range'] {
-  accent-color: var(--accent);
-  width: 100%;
-  height: 28px;
-  cursor: pointer;
 }
 
 :focus-visible {
@@ -85,10 +130,551 @@ input[type='range'] {
   display: none;
 }
 
+/* ───────────── Аврора ───────────── */
+
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+.aurora .blob {
+  position: absolute;
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: var(--aurora-opacity);
+  mix-blend-mode: normal;
+  will-change: transform;
+}
+.dark .aurora .blob {
+  mix-blend-mode: screen;
+}
+.aurora .b1 {
+  background: radial-gradient(circle at 50% 50%, var(--a1), transparent 62%);
+  top: -22vmax;
+  left: -14vmax;
+  animation: drift-1 26s ease-in-out infinite alternate;
+}
+.aurora .b2 {
+  background: radial-gradient(circle at 50% 50%, var(--a2), transparent 62%);
+  top: 10vmax;
+  right: -24vmax;
+  animation: drift-2 32s ease-in-out infinite alternate;
+}
+.aurora .b3 {
+  background: radial-gradient(circle at 50% 50%, var(--a3), transparent 60%);
+  bottom: -30vmax;
+  left: 12vmax;
+  animation: drift-3 38s ease-in-out infinite alternate;
+}
+.aurora .b4 {
+  background: radial-gradient(circle at 50% 50%, var(--a4), transparent 60%);
+  width: 34vmax;
+  height: 34vmax;
+  top: 40%;
+  left: 40%;
+  opacity: calc(var(--aurora-opacity) * 0.55);
+  animation: drift-4 22s ease-in-out infinite alternate;
+}
+/* Паралакс від курсора — зсув усього шару */
+.aurora .layer {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(calc(var(--px, 0) * -30px), calc(var(--py, 0) * -30px), 0);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.aurora .grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+}
+.aurora .grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark .aurora .grain {
+  opacity: 0.09;
+}
+
+@keyframes drift-1 {
+  to {
+    transform: translate3d(18vw, 12vh, 0) scale(1.15) rotate(30deg);
+  }
+}
+@keyframes drift-2 {
+  to {
+    transform: translate3d(-22vw, 20vh, 0) scale(0.85);
+  }
+}
+@keyframes drift-3 {
+  to {
+    transform: translate3d(14vw, -26vh, 0) scale(1.2);
+  }
+}
+@keyframes drift-4 {
+  0% {
+    transform: translate3d(-20vw, -10vh, 0) scale(0.8);
+  }
+  100% {
+    transform: translate3d(25vw, 15vh, 0) scale(1.3);
+  }
+}
+
+/* ───────────── Рідке скло ───────────── */
+
+.glass {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(145deg, var(--glass-tint), var(--glass-tint-2));
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: var(--glass-shadow);
+  border: 0 !important;
+}
+/* Обідок: градієнт, що ловить «світло» згори-зліва */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    var(--rim-angle, 140deg),
+    var(--glass-rim),
+    var(--glass-rim-2) 35%,
+    var(--glass-rim-2) 65%,
+    var(--glass-rim) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Прожектор за курсором */
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -200%), var(--spot), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: -1;
+}
+.glass:hover::after {
+  opacity: 1;
+}
+
+/* Справжнє заломлення (лише Chromium вміє url() у backdrop-filter) */
+.lg-refract .glass-refract {
+  -webkit-backdrop-filter: blur(4px) url(#liquid-glass) blur(10px) saturate(190%);
+  backdrop-filter: blur(4px) url(#liquid-glass) blur(10px) saturate(190%);
+}
+
+.card {
+  border-radius: 26px;
+  transition:
+    translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.6s;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    translate: 0 -3px;
+  }
+}
+
+/* Головний висновок: обертовий веселковий обідок.
+   Обертаємо трансформом всередині маски — це дешево для GPU і без артефактів. */
+.sheet {
+  border-radius: 30px;
+}
+.sheet::before {
+  display: none;
+}
+.sheet-rim,
+.sheet-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sheet-rim {
+  z-index: 1;
+  padding: 1.5px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.sheet-glow {
+  z-index: -2;
+  filter: blur(36px);
+  opacity: 0.3;
+}
+.sheet-rim::before,
+.sheet-glow::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300%;
+  aspect-ratio: 1;
+  background: conic-gradient(var(--a1), var(--a2), var(--glass-rim-2), var(--a3), var(--a4), var(--glass-rim-2), var(--a1));
+  animation: spin 9s linear infinite;
+  transform: translate(-50%, -50%);
+}
+.sheet-glow::before {
+  background: conic-gradient(var(--a1), var(--a2), var(--a3), var(--a4), var(--a1));
+}
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.pill {
+  border-radius: 999px;
+}
+
+/* Лідер: обідок і сяйво в кольорі акценту */
+.card-top {
+  --glass-rim: var(--accent);
+  --glass-rim-2: color-mix(in srgb, var(--accent) 25%, transparent);
+  box-shadow:
+    var(--glass-shadow),
+    0 0 70px -20px var(--accent);
+}
+
+/* Плаваючі панелі над вмістом — щільніше скло, щоб текст під ними не заважав */
+.glass-strong {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg) 55%, transparent), color-mix(in srgb, var(--bg) 35%, transparent));
+}
+
+/* Кнопки-скельця */
+.btn {
+  transition:
+    transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1),
+    background 0.3s,
+    box-shadow 0.3s;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.03);
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.95);
+  transition-duration: 0.1s;
+}
+.btn-solid {
+  color: white;
+  background: linear-gradient(135deg, var(--a1), var(--accent) 45%, var(--a2));
+  background-size: 200% 200%;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.4) inset,
+    0 10px 30px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+  animation: sheen 6s ease-in-out infinite alternate;
+}
+@keyframes sheen {
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+/* ───────────── Текст ───────────── */
+
+/* Кольоровий відблиск пробігає по заголовку: копія тексту поверх, обрізана градієнтом */
+.text-shine {
+  position: relative;
+  color: var(--ink);
+}
+.text-shine::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, var(--a1) 42%, var(--a2) 50%, var(--a3) 58%, transparent 70%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  animation: shine 7s cubic-bezier(0.6, 0, 0.2, 1) 1.4s infinite;
+}
+@keyframes shine {
+  0% {
+    background-position: 100% 0;
+  }
+  55%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+.text-grad {
+  background: linear-gradient(110deg, var(--accent-ink), var(--grad-2) 60%, var(--grad-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Літери заголовка злітаються з розмиття */
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.char {
+  display: inline-block;
+  animation: char-in 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(var(--i) * 45ms + 100ms);
+}
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em) rotateX(-70deg) scale(0.9);
+    filter: blur(12px);
+  }
+}
+
+/* Числа «перемикаються» при зміні */
+.tick {
+  display: inline-block;
+  animation: tick 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes tick {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+    filter: blur(6px);
+  }
+}
+
+/* ───────────── Поява ───────────── */
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    filter: blur(10px);
+  }
+}
+
+/* Вміст вкладки з'являється каскадом */
+.panel > * > * {
+  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+/* Під час прокрутки картки нижче екрана випливають */
+@supports (animation-timeline: view()) {
+  .card {
+    animation: scroll-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .panel > * > .card {
+    animation:
+      rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+      scroll-in linear both;
+    animation-timeline: auto, view();
+    animation-range: normal, entry 0% entry 40%;
+  }
+}
+.panel > * > :nth-child(2) {
+  animation-delay: 70ms;
+}
+.panel > * > :nth-child(3) {
+  animation-delay: 140ms;
+}
+.panel > * > :nth-child(4) {
+  animation-delay: 210ms;
+}
+.panel > * > :nth-child(n + 5) {
+  animation-delay: 280ms;
+}
+
+@keyframes scroll-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+}
+
+/* Смуги ростуть від нуля до значення */
+.grow-x {
+  transform-origin: left center;
+  animation: grow-x 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0ms) both;
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+.bar-fill {
+  background: linear-gradient(90deg, var(--a1), var(--accent), var(--a2));
+  box-shadow: 0 0 18px -2px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+/* ───────────── Навігація ───────────── */
+
+.tab-ind {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--a1), var(--accent) 50%, var(--a2));
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.45) inset,
+    0 8px 24px -6px color-mix(in srgb, var(--accent) 80%, transparent);
+  transition:
+    left 0.55s cubic-bezier(0.35, 1.5, 0.45, 1),
+    width 0.55s cubic-bezier(0.35, 1.5, 0.45, 1);
+}
+.tab-ind.jelly {
+  animation: jelly 0.55s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+@keyframes jelly {
+  35% {
+    transform: scaleX(1.18) scaleY(0.82);
+  }
+  65% {
+    transform: scaleX(0.94) scaleY(1.06);
+  }
+}
+
+/* ───────────── Повзунок ───────────── */
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+  height: 28px;
+  cursor: pointer;
+  --fill: 50%;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 99px;
+  background:
+    linear-gradient(90deg, var(--a1), var(--accent), var(--a2)) 0 0 / var(--fill) 100% no-repeat,
+    var(--surface-2);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.15);
+}
+input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-2);
+}
+input[type='range']::-moz-range-progress {
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--a1), var(--accent), var(--a2));
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -9px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, rgb(255 255 255 / 0.75) 45%, rgb(255 255 255 / 0.35));
+  border: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow:
+    0 4px 14px -2px color-mix(in srgb, var(--accent) 70%, transparent),
+    0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+  transition:
+    transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
+    box-shadow 0.3s;
+}
+input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, rgb(255 255 255 / 0.75) 45%, rgb(255 255 255 / 0.35));
+  border: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow: 0 4px 14px -2px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+input[type='range']:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+  box-shadow:
+    0 4px 14px -2px color-mix(in srgb, var(--accent) 70%, transparent),
+    0 0 0 8px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+input[type='range']:active::-webkit-slider-thumb {
+  transform: scale(1.3, 0.85);
+}
+
+/* ───────────── Графіки ───────────── */
+
 .recharts-text {
   fill: var(--muted);
 }
 .recharts-cartesian-axis-line,
 .recharts-cartesian-axis-tick-line {
   stroke: var(--line);
+}
+.recharts-tooltip-wrapper > div {
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 12px !important;
+  padding: 6px 10px !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* ───────────── Перемикання теми колом ───────────── */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  animation: reveal 0.9s cubic-bezier(0.7, 0, 0.2, 1);
+}
+@keyframes reveal {
+  from {
+    clip-path: circle(0 at var(--vx, 50%) var(--vy, 0%));
+  }
+  to {
+    clip-path: circle(var(--vr, 150vmax) at var(--vx, 50%) var(--vy, 0%));
+  }
+}
+
+dialog[open] {
+  animation: pop 0.5s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+dialog::backdrop {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+    filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  ::view-transition-new(root) {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
 }

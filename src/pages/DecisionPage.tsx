@@ -46,8 +46,8 @@ function ScorePicker({
               role="radio"
               aria-checked={on}
               onClick={() => onChange(s)}
-              className={`num h-8 w-8 rounded-md text-sm font-semibold ${
-                on ? 'bg-ink text-bg' : 'bg-surface-2 text-muted hover:text-ink'
+              className={`btn num h-8 w-8 rounded-full text-sm font-semibold ${
+                on ? 'btn-solid' : 'bg-surface-2 text-muted hover:text-ink'
               } ${s === base && !on ? 'ring-1 ring-inset ring-muted/50' : ''}`}
             >
               {s}
@@ -79,10 +79,10 @@ export default function DecisionPage() {
         стійкий до помилок в оцінках.
       </PageIntro>
 
-      <Card className="border-accent/40">
-        <p className="text-xs uppercase tracking-wide text-muted">Головний висновок</p>
-        <p className="mt-1 font-serif text-3xl font-semibold leading-tight text-ink sm:text-5xl">
-          Фокус фонду — <span className="text-accent-ink">{COMPANY_NAMES[top]}</span>
+      <Card className="sheet">
+        <p className="text-sm font-semibold text-muted">Головний висновок</p>
+        <p className="mt-1 font-display text-4xl font-bold leading-none tracking-tight text-ink sm:text-5xl lg:text-6xl">
+          Фокус фонду — <span className="text-grad">{COMPANY_NAMES[top]}</span>
         </p>
         <p className="mt-2 text-base text-ink sm:text-lg">
           №1 у <strong className="num">{pct(robust[top], 1)}</strong> з {int(LENS_LIMITS.robustnessRuns)} сценаріїв, де кожну
@@ -148,7 +148,7 @@ export default function DecisionPage() {
           дивимось, хто перший. Нічия ділить перше місце.
         </p>
         <ul className="mt-3 space-y-2">
-          {COMPANY_IDS.map((id) => (
+          {COMPANY_IDS.map((id, i) => (
             <li key={id}>
               <div className="flex justify-between text-sm">
                 <span className="text-ink">{COMPANY_NAMES[id]}</span>
@@ -156,8 +156,8 @@ export default function DecisionPage() {
               </div>
               <div className="mt-1 h-2.5 rounded-full bg-surface-2">
                 <div
-                  className={`h-2.5 rounded-full ${id === top ? 'bg-accent' : 'bg-sq'}`}
-                  style={{ width: `${robust[id] * 100}%` }}
+                  className={`grow-x h-2.5 rounded-full ${id === top ? 'bar-fill' : 'bg-sq'}`}
+                  style={{ width: `${robust[id] * 100}%`, ['--d' as string]: `${i * 150}ms` }}
                 />
               </div>
             </li>
@@ -183,14 +183,14 @@ function LensCard({
 }) {
   const { state } = useAppState()
   return (
-    <Card className={rank === 1 ? 'border-accent/50' : ''}>
+    <Card className={rank === 1 ? 'card-top' : ''}>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">№{rank}</p>
+          <p className="text-xs font-semibold text-muted">№{rank}</p>
           <H3>{COMPANY_NAMES[id]}</H3>
         </div>
         <div className="text-right">
-          <div className={`num font-serif text-3xl font-semibold ${rank === 1 ? 'text-accent-ink' : 'text-ink'}`}>
+          <div className={`num font-display text-3xl font-semibold ${rank === 1 ? 'text-accent-ink' : 'text-ink'}`}>
             {Number.isInteger(product) ? product : product.toFixed(1)}
           </div>
           <div className="text-xs text-muted">добуток</div>

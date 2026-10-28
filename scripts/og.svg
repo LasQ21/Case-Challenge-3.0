@@ -1,15 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0E1525"/>
-  <rect x="0" y="0" width="14" height="630" fill="#E04A35"/>
-  <text x="80" y="110" font-family="Helvetica Neue, Arial, sans-serif" font-size="26" letter-spacing="4" fill="#A7AEBB">CASE CHALLENGE 3.0 · HORIZON CAPITAL</text>
-  <text x="80" y="215" font-family="Georgia, serif" font-size="96" font-weight="bold" fill="#F5F3EE">Exit Simulator</text>
-  <text x="80" y="290" font-family="Helvetica Neue, Arial, sans-serif" font-size="36" fill="#F5F3EE">Фокус фонду — <tspan fill="#FF8A73" font-weight="bold">Security Hardware</tspan></text>
-  <text x="80" y="345" font-family="Helvetica Neue, Arial, sans-serif" font-size="30" fill="#A7AEBB">$10m Security · $3m бридж E-com · $0 IT · $2m резерв</text>
-  <g font-family="Helvetica Neue, Arial, sans-serif">
-    <rect x="80" y="420" width="250" height="16" rx="3" fill="#7D8699"/>
-    <text x="345" y="436" font-size="26" fill="#A7AEBB">Без дій  $125.7m</text>
-    <rect x="80" y="470" width="506" height="16" rx="3" fill="#E04A35"/>
-    <text x="601" y="486" font-size="26" fill="#F5F3EE" font-weight="bold">План  $254.5m</text>
-  </g>
-  <text x="80" y="570" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" fill="#A7AEBB">Дані кейсу ілюстративні; припущення — команди.</text>
+  <!-- Джерело public/og.png; як перерендерити — див. README, розділ «Презентація» -->
+  <style>
+    @font-face { font-family: 'Geologica'; font-weight: 700; src: url('../node_modules/@fontsource/geologica/files/geologica-cyrillic-700-normal.woff2'), url('../node_modules/@fontsource/geologica/files/geologica-latin-700-normal.woff2'); }
+    @font-face { font-family: 'Onest'; font-weight: 400; src: url('../node_modules/@fontsource/onest/files/onest-cyrillic-400-normal.woff2'), url('../node_modules/@fontsource/onest/files/onest-latin-400-normal.woff2'); }
+    @font-face { font-family: 'Onest'; font-weight: 600; src: url('../node_modules/@fontsource/onest/files/onest-cyrillic-600-normal.woff2'), url('../node_modules/@fontsource/onest/files/onest-latin-600-normal.woff2'); }
+    @font-face { font-family: 'JetBrains Mono'; src: url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-400-normal.woff2'), url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2'); }
+    .d { font-family: Geologica; font-weight: 700; }
+    .s { font-family: Onest; }
+    .m { font-family: 'JetBrains Mono'; }
+  </style>
+  <rect width="1200" height="630" fill="#F3F3EF"/>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#15171C" stroke-width="2"/>
+  <text x="72" y="92" class="m" font-size="20" fill="#6E6A61">Case Challenge 3.0, Horizon Capital</text>
+  <text x="72" y="190" class="d" font-size="88" letter-spacing="-2" fill="#15171C">Exit Simulator</text>
+  <text x="72" y="252" class="s" font-size="32" font-weight="600" fill="#15171C">Фокус фонду: <tspan fill="#2F45D8">Security Hardware</tspan></text>
+  <text x="72" y="300" class="s" font-size="24" fill="#6E6A61">$10m Security, $3m бридж E-com, $0 IT, $2m резерв</text>
+  <rect x="72" y="372" width="248" height="22" fill="#A8A296"/>
+  <text x="336" y="391" class="s" font-size="24" fill="#15171C">Без дій $125.7m</text>
+  <rect x="72" y="414" width="502" height="22" fill="#2F45D8"/>
+  <text x="590" y="433" class="s" font-size="24" font-weight="600" fill="#2F45D8">План $254.5m</text>
+  <line x1="24" y1="500" x2="1176" y2="500" stroke="#15171C" stroke-width="1"/>
+  <text x="72" y="560" class="s" font-size="20" fill="#6E6A61">Дані кейсу ілюстративні; припущення команди.</text>
+  <line x1="900" y1="500" x2="900" y2="606" stroke="#15171C" stroke-width="1"/>
+  <text x="920" y="560" class="m" font-size="20" fill="#15171C">Лист: модель</text>
 </svg>
