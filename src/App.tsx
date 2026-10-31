@@ -149,7 +149,9 @@ function Shell() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
-                Case Challenge 3.0 · Horizon Capital
+                <span>
+                  Case Challenge 3.0 · <span className="text-ink">SKELAR × Horizon Capital × Mastercard</span>
+                </span>
               </p>
               <h1
                 data-text="Exit Simulator"
