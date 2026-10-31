@@ -1,8 +1,9 @@
 import { lazy, Suspense, useLayoutEffect, useRef, useState } from 'react'
-import { DISCLAIMER } from './model/config'
+import { DISCLAIMER, DISCLAIMER_EN } from './model/config'
 import { portfolio } from './model/valuation'
 import { money } from './lib/format'
 import type { TabId } from './lib/urlState'
+import { LangProvider, useLang, type Lang } from './lib/i18n'
 import { AppStateProvider } from './state/AppStateProvider'
 import { useAppState } from './state/context'
 import { Button, btnClass } from './components/ui'
@@ -17,13 +18,38 @@ const CapitalPage = lazy(() => import('./pages/CapitalPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ShareDialog = lazy(() => import('./components/ShareDialog'))
 
-const TABS: { id: TabId; label: string }[] = [
-  { id: 'decision', label: 'Рішення' },
-  { id: 'scenarios', label: 'Сценарії' },
-  { id: 'risks', label: 'Ризики' },
-  { id: 'capital', label: '$15m' },
-  { id: 'about', label: 'Про модель' },
+const TABS: { id: TabId; label: string; labelEn: string }[] = [
+  { id: 'decision', label: 'Рішення', labelEn: 'Decision' },
+  { id: 'scenarios', label: 'Сценарії', labelEn: 'Scenarios' },
+  { id: 'risks', label: 'Ризики', labelEn: 'Risks' },
+  { id: 'capital', label: '$15m', labelEn: '$15m' },
+  { id: 'about', label: 'Про модель', labelEn: 'About' },
 ]
+
+// Перемикач мови UA / EN — капсула поруч із перемикачем теми
+function LangSwitch() {
+  const { lang, setLang } = useLang()
+  const opts: { id: Lang; label: string; aria: string }[] = [
+    { id: 'uk', label: 'UA', aria: 'Українська' },
+    { id: 'en', label: 'EN', aria: 'English' },
+  ]
+  return (
+    <div role="group" aria-label="Мова / Language" className="lang-switch glass glass-refract pill inline-flex h-12 items-center p-1">
+      {opts.map((o) => (
+        <button
+          key={o.id}
+          type="button"
+          aria-pressed={lang === o.id}
+          aria-label={o.aria}
+          onClick={() => setLang(o.id)}
+          className="h-10 min-w-10 rounded-full px-2.5 text-xs font-semibold text-muted transition-colors hover:text-ink"
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 // Заголовок розсипається на літери, що злітаються з розмиття
 function SplitTitle({ text }: { text: string }) {
@@ -48,6 +74,7 @@ function SplitTitle({ text }: { text: string }) {
 
 // Вкладки — плаваюча скляна капсула; підсвітка перетікає між ними, як крапля
 function Tabs({ tab, onSelect }: { tab: TabId; onSelect: (t: TabId) => void }) {
+  const { lang, t } = useLang()
   const refs = useRef<Partial<Record<TabId, HTMLButtonElement | null>>>({})
   const ind = useRef<HTMLSpanElement>(null)
   const first = useRef(true)
@@ -72,29 +99,29 @@ function Tabs({ tab, onSelect }: { tab: TabId; onSelect: (t: TabId) => void }) {
     addEventListener('resize', place)
     document.fonts?.ready.then(place)
     return () => removeEventListener('resize', place)
-  }, [tab])
+  }, [tab, lang])
 
   return (
-    <nav className="sticky top-3 z-30 mt-6 flex justify-center px-3" aria-label="Вкладки">
+    <nav className="sticky top-3 z-30 mt-6 flex justify-center px-3" aria-label={t('Вкладки', 'Tabs')}>
       <div className="glass glass-strong glass-refract pill no-scrollbar max-w-full overflow-x-auto p-1">
         <div role="tablist" className="relative flex min-w-max">
           <span ref={ind} className="tab-ind" aria-hidden />
-          {TABS.map((t) => {
-            const active = tab === t.id
+          {TABS.map((tab_) => {
+            const active = tab === tab_.id
             return (
               <button
-                key={t.id}
+                key={tab_.id}
                 ref={(el) => {
-                  refs.current[t.id] = el
+                  refs.current[tab_.id] = el
                 }}
                 role="tab"
                 aria-selected={active}
-                onClick={() => onSelect(t.id)}
+                onClick={() => onSelect(tab_.id)}
                 className={`relative z-10 min-h-10 rounded-full px-3.5 text-[13px] font-semibold transition-colors duration-300 sm:px-5 sm:text-sm ${
                   active ? 'text-white' : 'text-muted hover:text-ink'
                 }`}
               >
-                {t.label}
+                {lang === 'en' ? tab_.labelEn : tab_.label}
               </button>
             )
           })}
@@ -106,6 +133,7 @@ function Tabs({ tab, onSelect }: { tab: TabId; onSelect: (t: TabId) => void }) {
 
 function Shell() {
   const { state, setTab, reset, isDefault } = useAppState()
+  const { t } = useLang()
   const [sharing, setSharing] = useState(false)
   const pf = portfolio(state.a)
 
@@ -130,7 +158,8 @@ function Shell() {
                 <SplitTitle text="Exit Simulator" />
               </h1>
             </div>
-            <div className="rise" style={{ ['--d' as string]: '300ms' }}>
+            <div className="rise flex shrink-0 flex-col items-end gap-2 sm:flex-row sm:items-center" style={{ ['--d' as string]: '300ms' }}>
+              <LangSwitch />
               <ThemeToggle />
             </div>
           </div>
@@ -138,23 +167,23 @@ function Shell() {
             className="rise mt-4 max-w-3xl text-base font-semibold leading-snug text-ink sm:text-xl"
             style={{ ['--d' as string]: '500ms' }}
           >
-            Фокус на Security Hardware:{' '}
+            {t('Фокус на Security Hardware:', 'Focus on Security Hardware:')}{' '}
             <span key={pf.plan} className="num tick text-grad">
               {money(pf.plan)}
             </span>{' '}
-            на виході проти <span className="num">{money(pf.sq)}</span> без дій
-            {isDefault ? '' : ' — у вашому сценарії'}.
+            {t('на виході проти', 'at exit vs')} <span className="num">{money(pf.sq)}</span> {t('без дій', 'with no action')}
+            {isDefault ? '' : t(' — у вашому сценарії', ' — in your scenario')}.
           </p>
           <div className="rise mt-5 flex flex-wrap gap-2" style={{ ['--d' as string]: '650ms' }}>
             <a href="./deck.html" className={btnClass('solid')}>
-              Презентація ↗
+              {t('Презентація', 'Deck')} ↗
             </a>
             <a href="./deck.pdf" download="CC-146 — Exit Simulator.pdf" className={btnClass()}>
               PDF
             </a>
-            <Button onClick={() => setSharing(true)}>Поділитися · QR</Button>
+            <Button onClick={() => setSharing(true)}>{t('Поділитися · QR', 'Share · QR')}</Button>
             <Button onClick={reset} disabled={isDefault}>
-              ↺ Скинути до базового сценарію
+              ↺ {t('Скинути до базового сценарію', 'Reset to base case')}
             </Button>
           </div>
         </header>
@@ -164,7 +193,7 @@ function Shell() {
         <main key={state.tab} className="panel flex-1 px-4 py-6 sm:px-6" role="tabpanel">
           <Suspense
             fallback={
-              <div className="space-y-4" aria-label="Завантаження…">
+              <div className="space-y-4" aria-label={t('Завантаження…', 'Loading…')}>
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="glass card h-40 animate-pulse" />
                 ))}
@@ -180,7 +209,7 @@ function Shell() {
         </main>
 
         <footer className="sticky bottom-3 z-20 mx-3 mb-3 flex justify-center">
-          <p className="glass glass-strong rounded-2xl px-4 py-2 text-center sm:rounded-full font-mono text-[11px] text-muted sm:text-xs">{DISCLAIMER}</p>
+          <p className="glass glass-strong rounded-2xl px-4 py-2 text-center sm:rounded-full font-mono text-[11px] text-muted sm:text-xs">{t(DISCLAIMER, DISCLAIMER_EN)}</p>
         </footer>
 
         {sharing && (
@@ -195,8 +224,10 @@ function Shell() {
 
 export default function App() {
   return (
-    <AppStateProvider>
-      <Shell />
-    </AppStateProvider>
+    <LangProvider>
+      <AppStateProvider>
+        <Shell />
+      </AppStateProvider>
+    </LangProvider>
   )
 }

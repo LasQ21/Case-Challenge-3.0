@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
+import { useLang } from '../lib/i18n'
 
 type Theme = 'light' | 'dark'
 
@@ -13,6 +14,7 @@ function readStored(): Theme | null {
 }
 
 export function ThemeToggle() {
+  const { t } = useLang()
   const ref = useRef<HTMLButtonElement>(null)
   const [theme, setTheme] = useState<Theme>(() =>
     document.documentElement.classList.contains('dark') ? 'dark' : (readStored() ?? 'light'),
@@ -50,8 +52,8 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       className="btn glass glass-refract pill inline-flex h-12 w-12 items-center justify-center text-ink"
-      aria-label={next === 'dark' ? 'Увімкнути темну тему' : 'Увімкнути світлу тему'}
-      title={next === 'dark' ? 'Темна тема' : 'Світла тема'}
+      aria-label={next === 'dark' ? t('Увімкнути темну тему', 'Switch to dark theme') : t('Увімкнути світлу тему', 'Switch to light theme')}
+      title={next === 'dark' ? t('Темна тема', 'Dark theme') : t('Світла тема', 'Light theme')}
     >
       {/* Сонце, що «з'їдається» місяцем */}
       <svg

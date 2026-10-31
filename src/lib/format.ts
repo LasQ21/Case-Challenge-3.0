@@ -15,7 +15,9 @@ export const pp = (v: number) => `${sign(v, true)}${Math.abs(v * 100).toFixed(1)
 
 export const mult = (v: number) => `${v.toFixed(1)}x`
 
-export const int = (v: number) => Math.round(v).toLocaleString('uk-UA')
+// Розділювач тисяч за мовою сторінки: «10 000» / «10,000»
+export const int = (v: number) =>
+  Math.round(v).toLocaleString(typeof document !== 'undefined' && document.documentElement.lang === 'en' ? 'en-US' : 'uk-UA')
 
 export function formatBy(format: 'pct' | 'mult' | 'money' | 'int', v: number): string {
   switch (format) {

@@ -1,29 +1,38 @@
 import { useId } from 'react'
 import type { SliderSpec } from '../model/config'
 import { formatBy, snap } from '../lib/format'
+import { useLang } from '../lib/i18n'
+import { Info } from './Info'
 
-interface Props extends Omit<SliderSpec, 'path'> {
+interface Props extends Omit<SliderSpec, 'path' | 'labelEn' | 'info' | 'infoEn' | 'benchmark'> {
   value: number
   base?: number
   onChange: (v: number) => void
   hint?: string
+  // текст підказки (i) біля підпису
+  info?: string
+  benchmark?: { value: number; label: string }
 }
 
 // Повзунок із підписом, поточним значенням, позначкою бази та (опційно) орієнтиром.
-export function Slider({ label, value, min, max, step, format, base, benchmark, onChange, hint }: Props) {
+export function Slider({ label, value, min, max, step, format, base, benchmark, onChange, hint, info }: Props) {
+  const { t } = useLang()
   const id = useId()
   const changed = base !== undefined && Math.abs(value - base) > step / 2
   const pos = (v: number) => `${((v - min) / (max - min)) * 100}%`
   return (
     <div className="py-2">
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={id} className="text-sm text-ink">
-          {label}
-        </label>
+        <span className="inline-flex items-center">
+          <label htmlFor={id} className="text-sm text-ink">
+            {label}
+          </label>
+          {info && <Info label={label}>{info}</Info>}
+        </span>
         <span className="num text-sm font-semibold text-ink">
           <span key={value} className="tick">{formatBy(format, value)}</span>
           {changed && (
-            <span className="ml-1.5 text-xs font-normal text-muted">база {formatBy(format, base!)}</span>
+            <span className="ml-1.5 text-xs font-normal text-muted">{t('база', 'base')} {formatBy(format, base!)}</span>
           )}
         </span>
       </div>
@@ -49,7 +58,7 @@ export function Slider({ label, value, min, max, step, format, base, benchmark, 
       </div>
       {benchmark && (
         <p className="text-xs text-muted">
-          ▏ орієнтир {formatBy(format, benchmark.value)} — {benchmark.label}
+          ▏ {t('орієнтир', 'benchmark')} {formatBy(format, benchmark.value)} — {benchmark.label}
         </p>
       )}
       {hint && <p className="text-xs text-muted">{hint}</p>}

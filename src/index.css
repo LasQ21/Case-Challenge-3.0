@@ -678,3 +678,77 @@ dialog::backdrop {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ───────────── Підказка (i) ───────────── */
+
+.info-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--muted) 60%, transparent);
+  color: var(--muted);
+  font: italic 600 10px/1 Georgia, 'Times New Roman', serif;
+  vertical-align: 1px;
+  cursor: help;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+/* більша зона дотику, ніж сам кружечок */
+.info-btn {
+  position: relative;
+}
+.info-btn::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+.info-btn:hover,
+.info-btn:focus-visible,
+.info-btn[aria-expanded='true'] {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.info-tip {
+  position: fixed;
+  z-index: 100;
+  max-width: min(300px, calc(100vw - 24px));
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--tip-bg);
+  color: var(--tip-ink);
+  box-shadow: 0 12px 40px -12px rgb(0 0 0 / 0.45);
+  font-size: 12.5px;
+  line-height: 1.45;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  animation: tip-in 0.16s ease-out;
+}
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+:root {
+  --tip-bg: #10111c;
+  --tip-ink: #f3f3fb;
+}
+:root.dark {
+  --tip-bg: #f3f3fb;
+  --tip-ink: #10111c;
+}
+
+/* Перемикач мови */
+.lang-switch button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--bg);
+}

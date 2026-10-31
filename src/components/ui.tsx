@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Info } from './Info'
 
 // Картка — скельце над авророю: блюр, обідок-блік і прожектор за курсором
 export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
@@ -25,8 +26,13 @@ export function PageIntro({ title, children }: { title: string; children: ReactN
   )
 }
 
-export function H3({ children }: { children: ReactNode }) {
-  return <h3 className="scroll-mt-20 font-display text-lg font-semibold text-ink">{children}</h3>
+export function H3({ children, info }: { children: ReactNode; info?: ReactNode }) {
+  return (
+    <h3 className="scroll-mt-20 font-display text-lg font-semibold text-ink">
+      {children}
+      {info && <Info label={typeof children === 'string' ? children : undefined}>{info}</Info>}
+    </h3>
+  )
 }
 
 export function Stat({
@@ -34,15 +40,21 @@ export function Stat({
   value,
   sub,
   accent = false,
+  info,
 }: {
   label: string
   value: string
   sub?: ReactNode
   accent?: boolean
+  // текст підказки (i) біля підпису
+  info?: ReactNode
 }) {
   return (
     <div>
-      <div className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</div>
+      <div className="flex items-center text-xs font-semibold uppercase tracking-wider text-muted">
+        <span>{label}</span>
+        {info && <Info label={label}>{info}</Info>}
+      </div>
       <div className={`num font-display text-2xl font-semibold sm:text-3xl ${accent ? 'text-grad' : 'text-ink'}`}>
         {/* key перезапускає анімацію щоразу, як змінюється значення */}
         <span key={value} className="tick">

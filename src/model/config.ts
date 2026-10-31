@@ -12,6 +12,12 @@ export const COMPANY_NAMES: Record<CompanyId, string> = {
   ecom: 'E-commerce',
 }
 
+export const COMPANY_NAMES_EN: Record<CompanyId, string> = {
+  sec: 'Security Hardware',
+  it: 'IT Engineering',
+  ecom: 'E-commerce',
+}
+
 // ── 4.1. Дані кейсу (незмінні) ──────────────────────────────────────────────
 
 export const CASE_DATA = {
@@ -133,11 +139,35 @@ export const BENCHMARKS = {
 
 export type CriterionId = 'valueAtRisk' | 'urgency' | 'fundImpact' | 'exitReadiness'
 
-export const CRITERIA: readonly { id: CriterionId; label: string }[] = [
-  { id: 'valueAtRisk', label: 'Цінність під ризиком' },
-  { id: 'urgency', label: 'Терміновість' },
-  { id: 'fundImpact', label: 'Вплив фонду' },
-  { id: 'exitReadiness', label: 'Готовність до виходу' },
+export const CRITERIA: readonly { id: CriterionId; label: string; labelEn: string; info: string; infoEn: string }[] = [
+  {
+    id: 'valueAtRisk',
+    label: 'Цінність під ризиком',
+    labelEn: 'Value at risk',
+    info: 'Скільки грошей фонду можна втратити або створити в цій компанії.',
+    infoEn: 'How much of the fund’s money can be lost or created in this company.',
+  },
+  {
+    id: 'urgency',
+    label: 'Терміновість',
+    labelEn: 'Urgency',
+    info: 'Як швидко треба діяти, поки вікно можливостей не закрилося.',
+    infoEn: 'How fast the fund must act before the window closes.',
+  },
+  {
+    id: 'fundImpact',
+    label: 'Вплив фонду',
+    labelEn: 'Fund impact',
+    info: 'Наскільки результат цієї компанії зрушує підсумок усього фонду.',
+    infoEn: 'How much this company’s outcome moves the result of the whole fund.',
+  },
+  {
+    id: 'exitReadiness',
+    label: 'Готовність до виходу',
+    labelEn: 'Exit readiness',
+    info: 'Наскільки реально продати частку фонду за 24 місяці.',
+    infoEn: 'How realistic it is to sell the fund’s stake within 24 months.',
+  },
 ]
 
 export type LensScores = Record<CompanyId, Record<CriterionId, number>>
@@ -222,54 +252,80 @@ export const DEFAULT_EVENTS: RiskEvents = {
 
 export const EVENT_META: Record<
   EventId,
-  { label: string; effect: string; appliesPlan: boolean; appliesSq: boolean; trigger?: string }
+  {
+    label: string
+    labelEn: string
+    effect: string
+    effectEn: string
+    appliesPlan: boolean
+    appliesSq: boolean
+    trigger?: string
+    triggerEn?: string
+  }
 > = {
   exportDelay: {
     label: 'Затримка експортних дозволів / сертифікації в ЄС',
+    labelEn: 'EU export permits / certification delayed',
     effect: 'Security: ріст −2 п.п.; приріст мультиплікатора вдвічі менший',
+    effectEn: 'Security: growth −2 pp; multiple uplift halved',
     appliesPlan: true,
     appliesSq: false,
   },
   ceasefire: {
     label: "Перемир'я / зміна оборонних бюджетів",
+    labelEn: 'Ceasefire / defence budgets change',
     effect: 'Security: ріст −5 п.п., але мультиплікатор +1x',
+    effectEn: 'Security: growth −5 pp, but multiple +1x',
     appliesPlan: true,
     appliesSq: true,
   },
   siteStrike: {
     label: 'Удар по ключовому майданчику в Україні',
+    labelEn: 'Strike on a key site in Ukraine',
     effect: 'Security: EBITDA −15% (з хабом у ЄС −7%)',
+    effectEn: 'Security: EBITDA −15% (−7% with an EU hub)',
     appliesPlan: true,
     appliesSq: true,
   },
   euMargin: {
     label: 'Виробництво в ЄС з’їдає маржу',
+    labelEn: 'EU production eats into margin',
     effect: 'Security: маржа −2 п.п.',
+    effectEn: 'Security: margin −2 pp',
     appliesPlan: true,
     appliesSq: false,
   },
   founderConflict: {
     label: 'Конфлікт із засновниками / ключові люди',
+    labelEn: 'Conflict with founders / key people',
     effect: 'Вихід після дедлайну → дисконт примусового продажу −10%',
+    effectEn: 'Exit after the deadline → forced-sale discount −10%',
     appliesPlan: true,
     appliesSq: true,
   },
   ecomCreditors: {
     label: 'E-com: кредитори відмовили в мораторії',
+    labelEn: 'E-com: creditors refuse a moratorium',
     effect: 'Бридж не видається; гроші фонду з E-com = 0',
+    effectEn: 'No bridge is issued; fund proceeds from E-com = 0',
     appliesPlan: true,
     appliesSq: false,
   },
   itUtilization: {
     label: 'IT: утилізація < 65%',
+    labelEn: 'IT: utilisation < 65%',
     effect: 'EBITDA IT −25%, мультиплікатор 4.5x',
+    effectEn: 'IT EBITDA −25%, multiple 4.5x',
     appliesPlan: true,
     appliesSq: true,
     trigger: 'Продати IT негайно',
+    triggerEn: 'Sell IT immediately',
   },
   overrun: {
     label: 'Перевитрати програми Security',
+    labelEn: 'Security programme cost overrun',
     effect: 'Непокрита резервом частка зрізає приріст мультиплікатора вдвічі',
+    effectEn: 'The share not covered by the reserve halves the multiple uplift',
     appliesPlan: true,
     appliesSq: false,
   },
@@ -319,21 +375,38 @@ export type SliderFormat = 'pct' | 'mult' | 'money' | 'int'
 export interface SliderSpec {
   path: string
   label: string
+  labelEn: string
+  // текст підказки (i)
+  info: string
+  infoEn: string
   min: number
   max: number
   step: number
   format: SliderFormat
-  benchmark?: { value: number; label: string }
+  benchmark?: { value: number; label: string; labelEn: string }
 }
 
+// Лише ключові важелі кожної компанії; решта припущень лишається з DEFAULT_ASSUMPTIONS
+// (і досі читається з посилання, якщо її там змінено).
 export const SCENARIO_SLIDERS: Record<CompanyId, SliderSpec[]> = {
   sec: [
-    { path: 'sec.sq.growth', label: 'Ріст без дій, р/р', min: 0, max: 0.3, step: 0.005, format: 'pct' },
-    { path: 'sec.plan.growth', label: 'Ріст за планом, р/р', min: 0, max: 0.4, step: 0.005, format: 'pct' },
-    { path: 'sec.plan.margin', label: 'Маржа EBITDA за планом', min: 0.1, max: 0.3, step: 0.005, format: 'pct' },
+    {
+      path: 'sec.plan.growth',
+      label: 'Ріст виручки за планом, р/р',
+      labelEn: 'Revenue growth under the plan, YoY',
+      info: 'На скільки відсотків щороку зростає виручка Security, якщо фонд інвестує в розширення за кордон. За останній рік було +30% (250 → 325).',
+      infoEn: 'How fast Security’s revenue grows each year if the fund invests in expansion abroad. Last year it was +30% (250 → 325).',
+      min: 0,
+      max: 0.4,
+      step: 0.005,
+      format: 'pct',
+    },
     {
       path: 'sec.plan.mult',
-      label: 'Мультиплікатор на виході за планом',
+      label: 'Мультиплікатор на виході',
+      labelEn: 'Exit multiple',
+      info: 'У скільки разів покупець оцінить компанію відносно її річного операційного прибутку (EV/EBITDA). Вартість = EBITDA × мультиплікатор. Риска — медіана угод в обороні.',
+      infoEn: 'How many times its annual operating profit a buyer pays for the company (EV/EBITDA). Value = EBITDA × multiple. The tick marks the defence-deal median.',
       min: 4,
       max: 14,
       step: 0.1,
@@ -341,26 +414,62 @@ export const SCENARIO_SLIDERS: Record<CompanyId, SliderSpec[]> = {
       benchmark: {
         value: BENCHMARKS.defenceDealMedianMult,
         label: `медіана угод в обороні (${BENCHMARKS.defenceDealSource})`,
+        labelEn: `defence deal median (${BENCHMARKS.defenceDealSource})`,
       },
     },
-    { path: 'sec.plan.netDebtExit', label: 'Чистий борг на виході', min: 0, max: 40, step: 0.5, format: 'money' },
-    { path: 'sec.investment', label: 'Інвестиція фонду (pre-money)', min: 0, max: 15, step: 0.5, format: 'money' },
   ],
   it: [
-    { path: 'it.drift.ebitda', label: 'EBITDA без дій', min: 5, max: 25, step: 0.5, format: 'money' },
-    { path: 'it.drift.mult', label: 'Мультиплікатор без дій', min: 3, max: 8, step: 0.1, format: 'mult' },
-    { path: 'it.plan.ebitda', label: 'EBITDA за планом', min: 15, max: 35, step: 0.5, format: 'money' },
-    { path: 'it.plan.mult', label: 'Мультиплікатор за планом', min: 3, max: 9, step: 0.1, format: 'mult' },
+    {
+      path: 'it.plan.ebitda',
+      label: 'EBITDA за планом',
+      labelEn: 'EBITDA under the plan',
+      info: 'Річний операційний прибуток IT-інжинірингу через 2 роки: після скорочення ~300 спеціалістів і реінвестицій в AI та продажі. Зараз $21.6m.',
+      infoEn: 'IT Engineering’s annual operating profit in 2 years, after cutting ~300 staff and reinvesting in AI and sales. Today it is $21.6m.',
+      min: 15,
+      max: 35,
+      step: 0.5,
+      format: 'money',
+    },
+    {
+      path: 'it.plan.mult',
+      label: 'Мультиплікатор на виході',
+      labelEn: 'Exit multiple',
+      info: 'У скільки разів річного прибутку (EBITDA) покупець оцінить IT-бізнес на виході. Вартість = EBITDA × мультиплікатор.',
+      infoEn: 'How many times its annual profit (EBITDA) a buyer pays for the IT business at exit. Value = EBITDA × multiple.',
+      min: 3,
+      max: 9,
+      step: 0.1,
+      format: 'mult',
+    },
   ],
   ecom: [
-    { path: 'ecom.sq.fundValue', label: 'Гроші фонду без дій', min: 0, max: 5, step: 0.1, format: 'money' },
-    { path: 'ecom.plan.ebitda', label: 'EBITDA за планом', min: 5, max: 35, step: 0.5, format: 'money' },
-    { path: 'ecom.plan.mult', label: 'Мультиплікатор за планом', min: 3, max: 8, step: 0.1, format: 'mult' },
-    { path: 'ecom.plan.bridge', label: 'Бридж від фонду', min: 0, max: 10, step: 0.5, format: 'money' },
+    {
+      path: 'ecom.plan.ebitda',
+      label: 'EBITDA за планом',
+      labelEn: 'EBITDA under the plan',
+      info: 'Річний операційний прибуток E-commerce після стабілізації, якщо бридж від фонду допоможе пережити 6 місяців без ліквідності. Зараз $12m.',
+      infoEn: 'E-commerce’s annual operating profit after it stabilises, if the fund’s bridge loan carries it through 6 months without liquidity. Today it is $12m.',
+      min: 5,
+      max: 35,
+      step: 0.5,
+      format: 'money',
+    },
+    {
+      path: 'ecom.plan.mult',
+      label: 'Мультиплікатор на виході',
+      labelEn: 'Exit multiple',
+      info: 'У скільки разів річного прибутку (EBITDA) покупець оцінить E-commerce на виході. Вартість = EBITDA × мультиплікатор.',
+      infoEn: 'How many times its annual profit (EBITDA) a buyer pays for E-commerce at exit. Value = EBITDA × multiple.',
+      min: 3,
+      max: 8,
+      step: 0.1,
+      format: 'mult',
+    },
   ],
 }
 
 export const DISCLAIMER = 'Дані кейсу ілюстративні; припущення — команди.'
+export const DISCLAIMER_EN = 'Case data is illustrative; assumptions are the team’s.'
 
 // ── 13. Board Alerts (Telegram-бот) ─────────────────────────────────────────
 
